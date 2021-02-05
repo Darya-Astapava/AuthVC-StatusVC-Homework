@@ -15,14 +15,14 @@ class AuthViewController: UIViewController, SendingDataDelegate {
     static let notificationName = Notification.Name("usersData")
     
     // MARK: - Outlets
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
-
-    // MARK: - Methods
     
-    // Pass data with instance property and instanse method
+    // MARK: - Methods
+    // Pass data with instance property and instanse method through segue.
+    // Step 1: create a segue on storyboard between ViewControllers and add segue identifier.
+    // Step 3: override func prepare. Check identifier, create a property with destination view controller type and apply value to needed properties and methods.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToStatusVC",
            let destinationVC = segue.destination as? StatusViewController,
@@ -30,61 +30,50 @@ class AuthViewController: UIViewController, SendingDataDelegate {
            let password = self.passwordTextField.text {
             destinationVC.name = name
             destinationVC.getStatus(name: name, password: password)
-            destinationVC.delegate = self // Subscribe to delegate
-            destinationVC.closure = { [weak self] status in // Get data from closure
+            
+            // Pass data with delegate. Step 4: subscribe to delegate
+            destinationVC.delegate = self
+            
+            // Pass data with closure. Step 3: Get data from closure and use
+            destinationVC.closure = { [weak self] status in
                 guard let self = self else { return }
                 self.infoLabel.isHidden = false
-                if status == "Confirmed" {
-                    self.infoLabel.text = "Добро пожаловать, \(name)"
-                    self.infoLabel.textColor = .blue
-                } else {
-                    self.infoLabel.text = "Ошибка"
-                    self.infoLabel.textColor = .orange
-                }
+                self.infoLabel.text = status == "confirmed"
+                    ? "Добро пожаловать, \(name)"
+                    : "Ошибка"
+                self.infoLabel.textColor = status == "confirmed"
+                    ? .blue
+                    : .orange
             }
         }
     }
     
-    // Pass data with delegate. The function required by protocol
+    // Pass data with delegate. Step 3: The function required by protocol
     func changeBackgroundColor(status: StatusViewController.RegisterStatus) {
-        switch status {
-        case .Confirmed:
-            self.view.backgroundColor = .green
-        case .Declined:
-            self.view.backgroundColor = .red
-        }
+        self.view.backgroundColor = status.getColour(status: status)
     }
     
-    // Pass data with Notification Center
-    // Step 5: create func with changes for observer.
+    // Pass data with Notification Center. Step 5: create func with changes for observer.
     @objc private func showAlert(notification: Notification) {
         var message: String = ""
         var style: UIAlertAction.Style = .cancel
         
         if let userInfo = notification.userInfo,
            let status = userInfo["Status"] as? String {
-            if status == "Confirmed" {
-                message = "Вы успешно зарегистрировались"
-            } else {
-                message = "Регистрация не удалась"
-                style = .destructive
-            }
+            message = status == "confirmed"
+                ? "Вы успешно зарегистрировались"
+                : "Регистрация не удалась"
+            style = status == "confirmed"
+                ? .cancel
+                : .destructive
         }
-        
-        let allertController = UIAlertController(title: message,
-                                                 message: nil,
-                                                 preferredStyle: .alert)
-        allertController.addAction(UIAlertAction(title: "Ok",
-                                                 style: style,
-                                                 handler: nil))
-        self.present(allertController, animated: true, completion: nil)
-    }
-
-    // MARK: - Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        // Added alert.
+        AlertSingleton.shared.show(for: self,
+                                   title: message,
+                                   buttonStyle: style)
     }
     
+    // MARK: - Life Cycle
     // Pass data with Notification Center
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

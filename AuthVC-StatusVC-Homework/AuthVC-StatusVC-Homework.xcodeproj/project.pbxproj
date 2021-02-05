@@ -15,6 +15,7 @@
 		049EC6DA25CAD1B5007736A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049EC6D825CAD1B5007736A8 /* LaunchScreen.storyboard */; };
 		049EC6E425CAD255007736A8 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049EC6E325CAD255007736A8 /* StatusViewController.swift */; };
 		04C2796425CBDDE7003B8F9D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2796325CBDDE7003B8F9D /* Protocols.swift */; };
+		04C2796E25CD7514003B8F9D /* AlertSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2796D25CD7514003B8F9D /* AlertSingleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		049EC6DB25CAD1B5007736A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		049EC6E325CAD255007736A8 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		04C2796325CBDDE7003B8F9D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		04C2796D25CD7514003B8F9D /* AlertSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSingleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				049EC6E625CAD26E007736A8 /* ViewControllers */,
 				04C2796325CBDDE7003B8F9D /* Protocols.swift */,
+				04C2796D25CD7514003B8F9D /* AlertSingleton.swift */,
 				049EC6CD25CAD1B0007736A8 /* AppDelegate.swift */,
 				049EC6CF25CAD1B0007736A8 /* SceneDelegate.swift */,
 				049EC6D325CAD1B0007736A8 /* Main.storyboard */,
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C2796E25CD7514003B8F9D /* AlertSingleton.swift in Sources */,
 				04C2796425CBDDE7003B8F9D /* Protocols.swift in Sources */,
 				049EC6E425CAD255007736A8 /* StatusViewController.swift in Sources */,
 				049EC6D225CAD1B0007736A8 /* AuthViewController.swift in Sources */,
