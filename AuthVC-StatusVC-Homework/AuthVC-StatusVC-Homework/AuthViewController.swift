@@ -50,7 +50,7 @@ class AuthViewController: UIViewController, SendingDataDelegate {
     
     // Pass data with delegate. Step 3: The function required by protocol
     func changeBackgroundColor(status: StatusViewController.RegisterStatus) {
-        self.view.backgroundColor = status.getColour(status: status)
+        self.view.backgroundColor = status.getColour()
     }
     
     // Pass data with Notification Center. Step 5: create func with changes for observer.

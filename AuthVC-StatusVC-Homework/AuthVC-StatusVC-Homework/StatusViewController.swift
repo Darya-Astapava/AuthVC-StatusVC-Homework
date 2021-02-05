@@ -13,8 +13,8 @@ class StatusViewController: UIViewController {
         case confirmed
         case declined
         
-        func getColour(status: RegisterStatus) -> UIColor {
-            return status == .confirmed ? .green : .red
+        func getColour() -> UIColor {
+            return self == .confirmed ? .green : .red
         }
     }
     
